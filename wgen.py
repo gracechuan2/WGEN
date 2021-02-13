@@ -4,24 +4,7 @@ import numpy as np
 import math
 import time
 
-#Section 1---------------------------------------------------------------------------------------------------------------
-
-#OFFICIAL NOTATION
-#solar radiation = srad
-#min temp = tmin
-#max temp = tmax
-#rainfall = rain
-#min temp on dry days = tnd
-#min temp on wet days = tnw
-#max temp on dry days = txd
-#max temp on wet days = txw
-
-#NOTES
-#producing 200 years of daily weather data takes 50-60 sec
-#coefficients are calculated on yearly basis as in they change per year as opposed to using the same coefficients across
-# all years in the input data
-
-#Section 2------------------------------------------------------------------------------------------------------------------------
+#Section 1------------------------------------------------------------------------------------------------------------------------
 #Manual Input
 
 input_mns_sds = 'input.xls'
@@ -32,7 +15,7 @@ xlat = 19
 corrections = True
 output_name = 'full_gen3.csv'
 
-#Section 3------------------------------------------------------------------------------------------------------------------------
+#Section 2------------------------------------------------------------------------------------------------------------------------
 
 #function to create lag 1 serial correlation matrix
 def lag_corr(data,lag):
@@ -460,7 +443,7 @@ class WGEN:
         return output
 
 
-#Section 4-------------------------------------------------------------------------------------------------------------------
+#Section 3-------------------------------------------------------------------------------------------------------------------
 #initialize weather generation class
 weather_gen = WGEN('Inputs/'+input_mns_sds,'Inputs/'+input_data,strt_yr,n_yrs,xlat)
 #run weather generation
