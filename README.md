@@ -34,6 +34,7 @@ Inputs:
    - **"xsdd"** standard deviation of solar radiation for only dry days
    - **"xmnw"** mean solar radiation for only wet days
    - **"xsdw"** standard deviation of solar radiation for only wet days
+   - **"rnum"** mean number of wet days 
  
  ## Quick Start
  1. Set repository WGEN as directory 
@@ -47,4 +48,9 @@ Inputs:
     1. output_name = name output csv file (type in with quotation marks and add file extension *.csv* 'string')
  1. Run script
  1. Resulting output data will be located in the "Outputs" folder of the repository 
-   
+ 
+ ## Definitions
+ - A day is considered wet if rainfall for the day is at least 0.01 mm 
+ 
+ ## Technical Documentation
+ Coming soon!!! 
