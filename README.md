@@ -38,6 +38,7 @@ Inputs:
  
  ## Quick Start
  1. Set repository WGEN as directory 
+ 1. Place the above input files in the "Inputs" folder of the repository
  1. Open "wgen.py" 
  1. In section 1, fill in the variables listed 
     1. input_mns_sds = name of the excel file that holds the input values for means and sds (make sure to type in with quotation marks and add file extension *.xls* 'string')
@@ -54,3 +55,6 @@ Inputs:
  
  ## Technical Documentation
  Coming soon!!! 
+ 
+ ### Notes
+ I am planning on writing a script that will compile the means and standard deviations input file automatically soon.  
