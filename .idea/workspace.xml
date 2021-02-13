@@ -15,8 +15,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/wgen.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="6675">
-              <caret line="445" column="10" selection-start-line="445" selection-start-column="10" selection-end-line="445" selection-end-column="10" />
+            <state relative-caret-position="520">
+              <caret line="379" lean-forward="true" selection-start-line="379" selection-end-line="379" />
               <folding>
                 <element signature="e#122#141#0" expanded="true" />
               </folding>
@@ -31,6 +31,7 @@
       <find>rnum</find>
       <find>sradd</find>
       <find>print</find>
+      <find>transition</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -197,8 +198,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/wgen.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="6675">
-          <caret line="445" column="10" selection-start-line="445" selection-start-column="10" selection-end-line="445" selection-end-column="10" />
+        <state relative-caret-position="520">
+          <caret line="379" lean-forward="true" selection-start-line="379" selection-end-line="379" />
           <folding>
             <element signature="e#122#141#0" expanded="true" />
           </folding>

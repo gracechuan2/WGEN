@@ -34,61 +34,6 @@ def lag_corr(data,lag):
         diagn.append(row)
     return np.array(diagn)
 
-def transition_matrix(order,params):
-    pwd = params['pwd']
-    pdd = 1-pwd
-    pdw = params['pdw']
-    pww = 1-pdw
-    #our two states, wet and dry
-    states = ['w','d']
-    queue = ['w','d']
-    final_probs = {}
-    #BFS to get all combos of states with length 3
-    while queue!=[]:
-        ele = queue.pop(0)
-        if len(ele) ==order:
-            queue.append(ele)
-            break
-        for s in states:
-            new= ele+s
-            queue.append(new)
-    #create probability matrix
-    for state in queue:
-        p = 1
-        p_list = []
-        for i in range(len(state)-1):
-            if state[i] == 'w' and state[i+1]=='w':
-                p*=pww
-            elif state[i]=='w' and state[i+1]=='d':
-                p*=pdw
-            elif state[i]=='d' and state[i+1]=='d':
-                p*=pdd
-            else:
-                p*=pwd
-        p1=p
-        p2=p
-        for i in states:
-            if i=='w':
-                if state[-1]=='w':
-                    p1*=pww
-                else:
-                    p1*=pwd
-            else:
-                if state[-1]=='w':
-                    p2*=pdw
-                else:
-                    p2*=pdd
-        #reweighting probabilities
-        total = p1+p2
-        p1 = p1/total
-        p2 = p2/total
-        p_list.append(p1)
-        p_list.append(p2)
-        final_probs[state] = p_list
-
-    return final_probs
-
-
 class WGEN:
     #input_mns_sds and input_data are strings
     def __init__(self, input_mns_sds,input_data, strt_yr,n_yrs,xlat):
@@ -128,10 +73,8 @@ class WGEN:
         self.num_days_months = {1:31,2:28,3:31,4:30,5:31,6:30,7:31,8:31,9:30,10:31,11:30,12:31}
 
     def gen_monthly_probs(self,rain_df):
-
         #creates an indicator column for if it rained that day or not
         ind = rain_df.apply(lambda x: [1 if y >0.01 else 0 for y in x]).reset_index().drop(columns = ['index'])
-
         #find the number of wet and dry days
         last_day = ind['pred'].iloc[-1]
         if last_day==1:
@@ -140,12 +83,9 @@ class WGEN:
         else:
             num_wet = ind.sum(axis=0).values[0]
             num_dry = len(rain_df.index)-num_wet-1
-
-
         #takes the difference between day and previous day indicator then set T or F if equal to 1
         wd = ind.diff(axis=0).eq(1)
         dw = ind.diff(axis=0).eq(-1)
-
         #if diff equals to 1, then that means that day is a wet day w/ previous day being a dry day
         num_wd = wd.apply(lambda x: [1 if y==True else 0 for y in x])
         num_dw = dw.apply(lambda x: [1 if y==True else 0 for y in x])
@@ -157,7 +97,6 @@ class WGEN:
             pwd = None
         else:
             pwd = num_wd/num_dry
-
         if num_wet == 0:
             pdw = None
         else:
@@ -169,7 +108,6 @@ class WGEN:
         #generate probabilities of wet day given a wet day, wet day  given a  dry day, etc. for the year
         prob_wd = {1:0,2:0,3:0,4:0,5:0,6:0,7:0,8:0,9:0,10:0,11:0,12:0}
         prob_dw = {1:0,2:0,3:0,4:0,5:0,6:0,7:0,8:0,9:0,10:0,11:0,12:0}
-
         for month in range(12):
             month+=1
             m = data[data['month']==month]
@@ -181,22 +119,18 @@ class WGEN:
                 #isolate the rainfall column
                 rain_df = m_yr[['pred']]
                 pwd, pdw = self.gen_monthly_probs(rain_df)
-
                 if pwd is not None:
                     dry_yrs+=1
                     prob_wd[month]+=pwd
-
                 if pdw is not None:
                     wet_yrs+=1
                     prob_dw[month]+=pdw
-
             #divide sums
             if wet_yrs!=0:
                 avg = prob_dw[month]/wet_yrs
                 prob_dw[month] = avg
             if dry_yrs!=0:
                 prob_wd[month] = prob_wd[month]/dry_yrs
-
         self.prob_wd_df = prob_wd
         self.prob_dw_df = prob_dw
 
@@ -231,7 +165,6 @@ class WGEN:
                     gen_tntxsrad.append(value_tntxsrad)
                     val, w_or_d  = self.rain_generation(params,w_or_d)
                     gen_rainfall.append(val)
-
                 #concatenate resulting generated data on monthly basis
                 gen_data = pd.concat(gen_tntxsrad,axis=1)
                 gen_data.columns = [x for x in range(self.num_days_months[m])]
@@ -249,7 +182,6 @@ class WGEN:
                 #separate into 2 dataframes dry and wet
                 dry = gen_data[gen_data['rain']==0]
                 wet = gen_data[gen_data['rain']>0]
-
                 tmnd_avg = float(dry['tmin'].mean())
                 #check if there are no wet days, then the average would be just 0
                 if tmnd_avg==float(gen_data['tmin'].mean()):
@@ -258,13 +190,11 @@ class WGEN:
                     tmnw_avg = float(wet['tmin'].mean())
                     #only need to count wet yrs once out of min and max temp
                     wet_yrs[m]+=1
-
                 tmxd_avg = float(dry['tmax'].mean())
                 if tmxd_avg==float(gen_data['tmax'].mean()):
                     tmxw_avg = 0
                 else:
                     tmxw_avg = float(wet['tmax'].mean())
-
                 #add the averages as sums first
                 self.generated_avgs[m]['tnd']+=tmnd_avg
                 self.generated_avgs[m]['tnw']+=tmnw_avg
@@ -273,7 +203,6 @@ class WGEN:
                 self.generated_avgs[m]['srad']+=float(gen_data['srad'].mean())/self.n_yrs
                 #append newly generated data to growing dataset
                 final_output=pd.concat([final_output,gen_data],axis=0)
-
         #divide yrs and number of wet yrs!
         for m in range(12):
             m+=1
@@ -281,7 +210,6 @@ class WGEN:
             self.generated_avgs[m]['tnw']=self.generated_avgs[m]['tnw']/wet_yrs[m]
             self.generated_avgs[m]['txd']=self.generated_avgs[m]['txd']/self.n_yrs
             self.generated_avgs[m]['txw']=self.generated_avgs[m]['txw']/wet_yrs[m]
-
         return final_output.reset_index().drop(columns='index')
 
     #daily output
@@ -293,7 +221,6 @@ class WGEN:
         pdw = params['pdw']
         pww = 1-pdw
         pdd = 1-pwd
-        #MARKOV CHAIN HERE
         #right now we use a first order MC! 1 is wet day and 0 is dry day
         if w_or_d==0:
             new_state =np.random.choice([1,0],replace=True,p=[pwd,pdd])
@@ -306,7 +233,6 @@ class WGEN:
             return np.random.gamma(a,b), new_state
         else:
             return 0,new_state
-
 
     def calculate_residuals(self,X_i):
         #first compute epsilon, random independent components
@@ -335,7 +261,6 @@ class WGEN:
         #to ensure min and max are at least 0.1 apart
         if round(abs(tmin-tmax),3) <=0.1:
             t_i[1]+=1
-
         #incorporate the extraterrestrial radiation component
         srad = t_i[-1][0]
         rc = self.rada(doy)*0.8
@@ -356,7 +281,6 @@ class WGEN:
         gen_dataset = self.weather_generation().reset_index()
         #add a rainy indicator
         gen_dataset['rainy'] = np.where(gen_dataset['rain']>0.01,1,0)
-
         for month in range(12):
             month+=1
             ind = self.generated_avgs[month]['rain']
