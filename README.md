@@ -34,5 +34,6 @@ Inputs:
    - **"xsdd"** standard deviation of solar radiation for only dry days
    - **"xmnw"** mean solar radiation for only wet days
    - **"xsdw"** standard deviation of solar radiation for only wet days
+
   
    
