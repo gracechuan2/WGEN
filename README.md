@@ -12,7 +12,7 @@ Inputs:
      - **"tmnd"** minimum temperature (°C)
      - **"tmxd"** maximum temperature (°C)
      - **"solar"** solar radiation (MJ/m**2/d)
- - Monthly means and sds (xls): monthly averages of each weather variable that the generated dataset should target - sample input file provided in repository
+ - Monthly means and sds (xls): monthly averages of each weather variable that the generated dataset should target - sample input file provided in repository//
  *Use separate script to create this file from the input data or input values manually depending on your purposes* 
    - **"month"** month (1-12)
    - **"rainmn"** mean daily rainfall 
