@@ -38,14 +38,14 @@ Inputs:
  
  ## Quick Start
  1. Set repository WGEN as directory 
- 2. Open "wgen.py" 
- 3. In section 2, fill in the variables listed 
-   3. input_mns_sds = name of the excel file that holds the input values for means and sds (make sure to type in with quotation marks and add file extension *.xls* 'string')
-   3. input_data = name of the csv file with input dataset (type in with quotation marks and add file extension *.csv* 'string')
-   3. strt_yr = start year 
-   3. n_yrs = number of years you want to generate 
-   3. corrections = True or False (It is recommended to apply corrections to generated dataset for more accurate results) 
-   3. output_name = name output csv file (type in with quotation marks and add file extension *.csv* 'string')
- 4. Run script
- 5. Resulting output data will be located in the "Outputs" folder of the repository 
+ 1. Open "wgen.py" 
+ 1. In section 2, fill in the variables listed 
+   1. input_mns_sds = name of the excel file that holds the input values for means and sds (make sure to type in with quotation marks and add file extension *.xls* 'string')
+   1. input_data = name of the csv file with input dataset (type in with quotation marks and add file extension *.csv* 'string')
+   1. strt_yr = start year 
+   1. n_yrs = number of years you want to generate 
+   1. corrections = True or False (It is recommended to apply corrections to generated dataset for more accurate results) 
+   1. output_name = name output csv file (type in with quotation marks and add file extension *.csv* 'string')
+ 1. Run script
+ 1. Resulting output data will be located in the "Outputs" folder of the repository 
    
