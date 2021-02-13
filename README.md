@@ -13,6 +13,7 @@ Inputs:
      - **"tmxd"** maximum temperature (°C)
      - **"solar"** solar radiation (MJ/m**2/d)
  - Monthly means and sds (xls): monthly averages of each weather variable that the generated dataset should target - sample input file provided in repository
+ *Use separate script to create this file from the input data or input values manually depending on your purposes* 
    - **"month"** month (1-12)
    - **"rainmn"** mean daily rainfall 
    - **"rainsd"** standard deviation of daily rainfall 
@@ -34,6 +35,17 @@ Inputs:
    - **"xsdd"** standard deviation of solar radiation for only dry days
    - **"xmnw"** mean solar radiation for only wet days
    - **"xsdw"** standard deviation of solar radiation for only wet days
+ 
+ ## Quick Start
+ 1. Set repository WGEN as directory 
+ 2. Open "wgen.py" 
+ 3. In section 2, fill in the variables listed 
+   3. input_mns_sds = name of the excel file that holds the input values for means and sds (make sure to type in with quotation marks 'string')
+   3. input_data = name of the csv file with input dataset (make sure to type in with quotation marks 'string')
+   3. strt_yr = start year (type in as a number)
+   3. n_yrs = number of years you want to generate 
+ 4. Run script
+ 5. Resulting output data will be located in the "outputs" folder of the repository 
 
   
    
