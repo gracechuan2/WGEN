@@ -37,24 +37,22 @@ Inputs:
    - **"rnum"** mean number of wet days 
  
  ## Quick Start
- 1. Set repository WGEN as directory 
- 1. Place the above input files in the "Inputs" folder of the repository
- 1. Open "wgen.py" 
- 1. In section 1, fill in the variables listed 
+ 1. Set repository WGEN as directory
+ 2. Place the input historical dataset labelled and formatted as specified above in the "Inputs" folder of the repository
+ 3. Generate the "Input weather weather dataset" input file using the "compile_means_sds.py" script   
+ 4. Open "wgen.py" 
+ 5. In section 1, fill in the variables listed 
     1. input_mns_sds = name of the excel file that holds the input values for means and sds (make sure to type in with quotation marks and add file extension *.xls* 'string')
     1. input_data = name of the csv file with input dataset (type in with quotation marks and add file extension *.csv* 'string')
     1. strt_yr = start year 
     1. n_yrs = number of years you want to generate 
     1. corrections = True or False (It is recommended to apply corrections to generated dataset for more accurate results) 
     1. output_name = name output csv file (type in with quotation marks and add file extension *.csv* 'string')
- 1. Run script
- 1. Resulting output data will be located in the "Outputs" folder of the repository 
+ 6. Run script
+ 7. Resulting output data will be located in the "Outputs" folder of the repository 
  
  ## Definitions
  - A day is considered wet if rainfall for the day is at least 0.01 mm 
  
  ## Technical Documentation
  Coming soon!!! 
- 
- ### Notes
- I am planning on writing a script that will compile the means and standard deviations input file automatically soon.  
