@@ -2,6 +2,13 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="3e4fa688-172c-4195-b73d-d5400c912d66" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/compile_means_sds.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Inputs/input.xls" beforeDir="false" afterPath="$PROJECT_DIR$/Inputs/input.xls" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Outputs/full_gen.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Outputs/full_gen1.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Outputs/full_gen3.csv" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/wgen.py" beforeDir="false" afterPath="$PROJECT_DIR$/wgen.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -11,14 +18,26 @@
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="FileEditorManager">
-    <leaf>
-      <file pinned="false" current-in-tab="true">
+    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/wgen.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="520">
-              <caret line="379" lean-forward="true" selection-start-line="379" selection-end-line="379" />
+            <state relative-caret-position="-1073">
+              <caret line="150" column="20" lean-forward="true" selection-start-line="150" selection-start-column="20" selection-end-line="150" selection-end-column="20" />
               <folding>
                 <element signature="e#122#141#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/compile_means_sds.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="362">
+              <caret line="95" selection-start-line="95" selection-end-line="95" />
+              <folding>
+                <element signature="e#131#150#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -28,10 +47,13 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>rnum</find>
       <find>sradd</find>
       <find>print</find>
       <find>transition</find>
+      <find>.mean()</find>
+      <find>dry</find>
+      <find>xmnd</find>
+      <find>rnum</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -41,14 +63,16 @@
     <option name="CHANGED_PATHS">
       <list>
         <option value="$PROJECT_DIR$/random_distribution3.py" />
+        <option value="$PROJECT_DIR$/wgen2.py" />
         <option value="$PROJECT_DIR$/wgen.py" />
+        <option value="$PROJECT_DIR$/compile_means_sds.py" />
       </list>
     </option>
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="122" />
-    <option name="y" value="24" />
-    <option name="width" value="1318" />
+    <option name="x" value="73" />
+    <option name="y" value="49" />
+    <option name="width" value="1367" />
     <option name="height" value="803" />
   </component>
   <component name="ProjectView">
@@ -74,6 +98,15 @@
               <item name="WGEN" type="462c0819:PsiDirectoryNode" />
               <item name="Outputs" type="462c0819:PsiDirectoryNode" />
             </path>
+            <path>
+              <item name="WGEN" type="b2602c69:ProjectViewProjectNode" />
+              <item name="Scratches and Consoles" type="1a2a3e82:ScratchProjectViewPane$MyProjectNode" />
+            </path>
+            <path>
+              <item name="WGEN" type="b2602c69:ProjectViewProjectNode" />
+              <item name="Scratches and Consoles" type="1a2a3e82:ScratchProjectViewPane$MyProjectNode" />
+              <item name="Scratches" type="d62648e6:ScratchProjectViewPane$MyRootNode" />
+            </path>
           </expand>
           <select />
         </subPane>
@@ -83,6 +116,11 @@
   <component name="PropertiesComponent">
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
+  </component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$" />
+    </key>
   </component>
   <component name="RunDashboard">
     <option name="ruleStates">
@@ -96,7 +134,28 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Python.wgen">
+  <component name="RunManager" selected="Python.compile_means_sds">
+    <configuration name="compile_means_sds" type="PythonConfigurationType" factoryName="Python" temporary="true">
+      <module name="WGEN" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/compile_means_sds.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
     <configuration name="random_distribution3" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <module name="WGEN" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -141,6 +200,7 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Python.compile_means_sds" />
         <item itemvalue="Python.wgen" />
         <item itemvalue="Python.random_distribution3" />
       </list>
@@ -150,38 +210,29 @@
     <configuration />
   </component>
   <component name="ToolWindowManager">
-    <frame x="122" y="24" width="1318" height="803" extended-state="0" />
+    <frame x="73" y="49" width="1367" height="803" extended-state="0" />
     <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.22282189" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.21471025" />
       <window_info id="Structure" order="1" weight="0.25" />
-      <window_info anchor="bottom" id="Educational.CheckDetails" />
-      <window_info anchor="bottom" id="Version Control" />
-      <window_info anchor="bottom" id="Terminal" />
-      <window_info anchor="bottom" id="Python Console" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
-      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.07307172" />
+      <window_info anchor="bottom" id="Run" order="2" weight="0.36806494" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" />
+      <window_info anchor="bottom" id="Version Control" order="7" />
+      <window_info anchor="bottom" id="Educational.CheckDetails" order="8" />
+      <window_info anchor="bottom" id="Terminal" order="9" />
+      <window_info anchor="bottom" id="Python Console" order="10" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
     </layout>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/random_distribution3.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1154">
-          <caret line="121" column="69" selection-start-line="121" selection-start-column="69" selection-end-line="121" selection-end-column="69" />
-          <folding>
-            <element signature="e#0#19#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/random_distribution3.py" />
     <entry file="file://$USER_HOME$/.conda/envs/lab.py/lib/python3.6/site-packages/pandas/core/reshape/concat.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="624">
@@ -196,12 +247,46 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/wgen.py">
+    <entry file="file://$PROJECT_DIR$/wgen2.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="520">
-          <caret line="379" lean-forward="true" selection-start-line="379" selection-end-line="379" />
+        <state relative-caret-position="-1839">
+          <caret line="15" column="20" selection-start-line="15" selection-start-column="20" selection-end-line="15" selection-end-column="20" />
           <folding>
             <element signature="e#122#141#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$USER_HOME$/.conda/envs/lab.py/lib/python3.6/site-packages/pandas/core/indexes/base.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="131">
+          <caret line="2645" selection-start-line="2645" selection-end-line="2645" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/wgen.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-1073">
+          <caret line="150" column="20" lean-forward="true" selection-start-line="150" selection-start-column="20" selection-end-line="150" selection-end-column="20" />
+          <folding>
+            <element signature="e#122#141#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$USER_HOME$/.conda/envs/lab.py/lib/python3.6/site-packages/pandas/core/indexes/range.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="166">
+          <caret line="349" selection-start-line="349" selection-end-line="349" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/compile_means_sds.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="362">
+          <caret line="95" selection-start-line="95" selection-end-line="95" />
+          <folding>
+            <element signature="e#131#150#0" expanded="true" />
           </folding>
         </state>
       </provider>

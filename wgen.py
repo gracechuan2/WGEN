@@ -13,7 +13,7 @@ strt_yr = 2002
 n_yrs = 200
 xlat = 19
 corrections = True
-output_name = 'full_gen3.csv'
+output_name = 'full_gen4.csv'
 
 #Section 2------------------------------------------------------------------------------------------------------------------------
 
@@ -143,8 +143,8 @@ class WGEN:
         sds = np.array([self.means_sds[1]['tnd'][1],self.means_sds[1]['txd'][1],self.means_sds[1]['srad'][1]]).reshape(3,1)
         means = np.array([self.means_sds[1]['tnd'][0],self.means_sds[1]['txd'][0],self.means_sds[1]['srad'][0]]).reshape(3,1)
         X_i = (t1-means)/sds
+        w_or_d = 0
         for yr in range(self.n_yrs):
-            current_yr = self.strt_yr+yr
             doy=0
             #weather generation
             for m in range(12):
@@ -157,7 +157,6 @@ class WGEN:
                 params = {'a':a,'b':b,'pwd':pwd,'pdw':pdw}
                 gen_rainfall = []
                 gen_tntxsrad=[]
-                w_or_d = 0
                 for d in range(self.num_days_months[m]):
                     doy+=1
                     #generate all weather variables
@@ -180,8 +179,8 @@ class WGEN:
                 gen_data['day'] = gen_data.index+1
                 #find average of min and max temp
                 #separate into 2 dataframes dry and wet
-                dry = gen_data[gen_data['rain']==0]
-                wet = gen_data[gen_data['rain']>0]
+                dry = gen_data[gen_data['rain']<=0.01]
+                wet = gen_data[gen_data['rain']>0.01]
                 tmnd_avg = float(dry['tmin'].mean())
                 #check if there are no wet days, then the average would be just 0
                 if tmnd_avg==float(gen_data['tmin'].mean()):
@@ -365,6 +364,7 @@ class WGEN:
         sod=sc*dsinb
         output=sod/10**6
         return output
+
 
 
 #Section 3-------------------------------------------------------------------------------------------------------------------
