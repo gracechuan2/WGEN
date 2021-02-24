@@ -9,11 +9,11 @@ import time
 
 input_mns_sds = 'input.xls'
 input_data = 'neutral_200.csv'
-strt_yr = 2002
+strt_yr =2202
 n_yrs = 200
 xlat = 19
 corrections = True
-output_name = 'full_gen4.csv'
+output_name = 'full_gen.csv'
 
 #Section 2------------------------------------------------------------------------------------------------------------------------
 
@@ -42,8 +42,13 @@ class WGEN:
         self.means_sds = {}
         self.input = pd.read_excel(input_mns_sds)
         self.xlat = xlat
+        self.rain_params = {}
         #input existing weather dataset
         self.og_data = pd.read_csv(input_data)
+        #find historical time period
+        self.time_period = self.og_data['year'].unique()
+        #start year of historical data!
+        self.hist_strt_yr = self.time_period[0]
         #keep avg of generated monthly precipitation values and avg
         self.generated_avgs = {}
         #convert table of means and sds for each month into easily accessible dictionary:
@@ -53,6 +58,12 @@ class WGEN:
             weather_dict = {'rain':[self.input.loc[month-1,'rainmn'],self.input.loc[month-1,'rainsd']], 'tmin':[self.input.loc[month-1,'tminmn'],self.input.loc[month-1,'tminsd']], 'tmax':[self.input.loc[month-1,'tmaxmn'],self.input.loc[month-1,'tmaxsd']], 'srad':[self.input.loc[month-1,'sradmn'],self.input.loc[month-1,'sradsd']], 'tnw':[self.input.loc[month-1,'tnmnw'],self.input.loc[month-1,'tnsdw']],'tnd':[self.input.loc[month-1,'tnmnd'],self.input.loc[month-1,'tnsdd']],'txw':[self.input.loc[month-1,'txmnw'],self.input.loc[month-1,'txsdw']],'txd':[self.input.loc[month-1,'txmnd'],self.input.loc[month-1,'txsdd']]}
             self.means_sds[month] = weather_dict
             self.generated_avgs[month] = {'rain':0,'tnw':0,'tnd':0,'txw':0,'txd':0,'srad':0}
+        #calculates each month's beta and alpha values
+        for month in range(12):
+            month+=1
+            b = self.means_sds[month]['rain'][1]**2/self.means_sds[month]['rain'][0]
+            a = self.means_sds[month]['rain'][0]/b
+            self.rain_params[month] = [a,b]
         #M0 is the correlation matrix of variables on the same day, M1 is same as M0 but one variable is lagged
         self.weather = self.og_data[['tmnd','tmxd','solar']].T
         M0=np.corrcoef(self.weather)
@@ -113,8 +124,8 @@ class WGEN:
             m = data[data['month']==month]
             wet_yrs = 0
             dry_yrs = 0
-            for yr in range(self.n_yrs):
-                m_yr = m[m['year']==self.strt_yr+yr]
+            for yr in self.time_period:
+                m_yr = m[m['year']==yr]
                 #single month given a specific yr
                 #isolate the rainfall column
                 rain_df = m_yr[['pred']]
@@ -138,20 +149,16 @@ class WGEN:
         final_output = pd.DataFrame()
         #keep track of the years where it did rain
         wet_yrs = {1:0,2:0,3:0,4:0,5:0,6:0,7:0,8:0,9:0,10:0,11:0,12:0}
-        #set t1 for Jan 1st of the start yr and find the very first X1
-        t1 = np.array(self.weather.iloc[:,0]).reshape(3,1)
-        sds = np.array([self.means_sds[1]['tnd'][1],self.means_sds[1]['txd'][1],self.means_sds[1]['srad'][1]]).reshape(3,1)
-        means = np.array([self.means_sds[1]['tnd'][0],self.means_sds[1]['txd'][0],self.means_sds[1]['srad'][0]]).reshape(3,1)
-        X_i = (t1-means)/sds
+        X_i = self.start_residual()
         w_or_d = 0
         for yr in range(self.n_yrs):
             doy=0
             #weather generation
             for m in range(12):
                 m+=1
-                #calculate beta and alpha for rain generation
-                b = self.means_sds[m]['rain'][1]**2/self.means_sds[m]['rain'][0]
-                a = self.means_sds[m]['rain'][0]/b
+                #get beta, alpha, and  probabilities
+                b = self.rain_params[m][1]
+                a = self.rain_params[m][0]
                 pwd = self.prob_wd_df[m]
                 pdw = self.prob_dw_df[m]
                 params = {'a':a,'b':b,'pwd':pwd,'pdw':pdw}
@@ -177,7 +184,6 @@ class WGEN:
                 gen_data['year'] = self.strt_yr+yr
                 gen_data['month'] = m
                 gen_data['day'] = gen_data.index+1
-                #find average of min and max temp
                 #separate into 2 dataframes dry and wet
                 dry = gen_data[gen_data['rain']<=0.01]
                 wet = gen_data[gen_data['rain']>0.01]
@@ -233,16 +239,21 @@ class WGEN:
         else:
             return 0,new_state
 
-    def calculate_residuals(self,X_i):
+    #direction as in the chronological direction
+    def calculate_residuals(self,X_i,direction):
         #first compute epsilon, random independent components
         mu=0
         sigma=1
         e= np.random.normal(mu, sigma,3).reshape(3,1)
-        X_i = np.dot(self.A,X_i)+np.dot(self.B,e)
+        Be = np.dot(self.B,e)
+        if direction == 'forward':
+            X_i = np.dot(self.A,X_i)+Be
+        else:
+            X_i = np.dot(np.linalg.inv(self.A),(X_i-Be))
         return X_i
 
     def gen_srad_temps(self,w_or_d,m,X_i,doy):
-        X_i=self.calculate_residuals(X_i)
+        X_i=self.calculate_residuals(X_i, 'forward')
         #discern sds and means (this is where you would adjust the moving means)
         if w_or_d==0:
             sds = np.array([self.means_sds[m]['tnd'][1],self.means_sds[m]['txd'][1],self.means_sds[m]['srad'][1]]).reshape(3,1)
@@ -365,6 +376,37 @@ class WGEN:
         output=sod/10**6
         return output
 
+    def start_residual(self):
+        data_strt = self.time_period[0]
+        data_end = self.time_period[-1]
+        sds = np.array([self.means_sds[1]['tnd'][1],self.means_sds[1]['txd'][1],self.means_sds[1]['srad'][1]]).reshape(3,1)
+        means = np.array([self.means_sds[1]['tnd'][0],self.means_sds[1]['txd'][0],self.means_sds[1]['srad'][0]]).reshape(3,1)
+        #Case 1: start year is within the historical time period
+        if self.strt_yr >= data_strt and self.strt_yr <= data_end:
+            #find the index of jaanuary 1st of the strt year:
+            month = self.og_data.loc[(self.og_data['year'] == self.strt_yr) & (self.og_data['month'] ==1)][['tmnd','tmxd','solar']].T
+            #set t1 for Jan 1st of the start yr and find the very first X1
+            t1 = np.array(month.iloc[:,0]).reshape(3,1)
+            X_i = (t1-means)/sds
+        #Case 2: start year is after time period
+        elif self.strt_yr > data_end:
+            #number of days to pass by/iterate through
+            time_travel = (self.strt_yr-data_end-1)*365+1
+            #identify the last day in the historical data
+            t1 = np.array(self.weather.iloc[:,-1]).reshape(3,1)
+            X_i = (t1-means)/sds
+            for day in range(time_travel):
+                X_i = self.calculate_residuals(X_i,'forward')
+        #Case 3: start year is before time period
+        else:
+            #number of days to pass by/iterate through
+            time_travel = (data_strt-self.strt_yr)*365
+            #identify the first day in the historical data
+            t1 = np.array(self.weather.iloc[:,0]).reshape(3,1)
+            X_i = (t1-means)/sds
+            for day in range(time_travel):
+                X_i = self.calculate_residuals(X_i,'backward')
+        return X_i
 
 
 #Section 3-------------------------------------------------------------------------------------------------------------------

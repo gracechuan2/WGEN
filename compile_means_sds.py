@@ -79,31 +79,33 @@ final_input = final_input.set_index('month')
 
 #optional corrections of the means
 def corrections(table):
+    table_copy = table
+    sds_vars = ['txsdd', 'txsdw', 'tnsdd', 'tnsdw',	'xsdd',	'xsdw',	'rainsd', 'tmaxsd',	'tminsd', 'sradsd']
     for weather in table.columns:
-        if weather == 'rnum' or weather == 'rainmn' or weather == 'rainsd':
-            continue
-        for m in range(12):
-            m+=1
-            if m==1:
-                prv = 12
-                nxt = 2
-            elif m==12:
-                nxt = 1
-                prv = 11
-            else:
-                prv = m-1
-                nxt = m+1
+        if weather in sds_vars:
+            for m in range(12):
+                m+=1
+                if m==1:
+                    prv = 12
+                    nxt = 2
+                elif m==12:
+                    nxt = 1
+                    prv = 11
+                else:
+                    prv = m-1
+                    nxt = m+1
 
-            add = table.loc[m,weather] - (0.25*(table.loc[prv,weather]+2*table.loc[m,weather]+table.loc[nxt,weather]))
+                add = table_copy.loc[m,weather] - (0.25*(table_copy.loc[prv,weather]+2*table_copy.loc[m,weather]+table_copy.loc[nxt,weather]))
 
-            #add correction to the weather variable
-            table.loc[m,weather] = table.loc[m,weather]+add
+                #add correction to the weather variable
+                if table_copy.loc[m,weather] + add > 0:
+                    table.loc[m,weather] = table_copy.loc[m,weather]+add
 
-    return table
+    return table_copy
 
 final_input = corrections(final_input)
 #export final input table
-#final_input.to_excel('Inputs/input2.xls')
+final_input.to_excel('Inputs/input3.xls')
 
 
 
