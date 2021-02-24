@@ -389,7 +389,7 @@ class WGEN:
             t1 = np.array(month.iloc[:,0]).reshape(3,1)
             X_i = (t1-means)/sds
         #Case 2: start year is after time period
-        elif self.strt_yr > data_end:
+        if self.strt_yr > data_end:
             #number of days to pass by/iterate through
             time_travel = (self.strt_yr-data_end-1)*365+1
             #identify the last day in the historical data
@@ -397,17 +397,7 @@ class WGEN:
             X_i = (t1-means)/sds
             for day in range(time_travel):
                 X_i = self.calculate_residuals(X_i,'forward')
-        #Case 3: start year is before time period
-        else:
-            #number of days to pass by/iterate through
-            time_travel = (data_strt-self.strt_yr)*365
-            #identify the first day in the historical data
-            t1 = np.array(self.weather.iloc[:,0]).reshape(3,1)
-            X_i = (t1-means)/sds
-            for day in range(time_travel):
-                X_i = self.calculate_residuals(X_i,'backward')
         return X_i
-
 
 #Section 3-------------------------------------------------------------------------------------------------------------------
 #initialize weather generation class

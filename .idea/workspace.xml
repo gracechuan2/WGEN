@@ -2,11 +2,6 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="3e4fa688-172c-4195-b73d-d5400c912d66" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Inputs/input.xls" beforeDir="false" afterPath="$PROJECT_DIR$/Inputs/input.xls" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Inputs/input2.xls" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/compile_means_sds.py" beforeDir="false" afterPath="$PROJECT_DIR$/compile_means_sds.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/wgen.py" beforeDir="false" afterPath="$PROJECT_DIR$/wgen.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -20,8 +15,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/wgen.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="164">
-              <caret line="165" column="31" lean-forward="true" selection-end-line="421" />
+            <state relative-caret-position="422">
+              <caret line="399" column="18" selection-start-line="399" selection-start-column="18" selection-end-line="399" selection-end-column="18" />
               <folding>
                 <element signature="e#122#141#0" expanded="true" />
               </folding>
@@ -212,7 +207,7 @@
     <frame x="60" y="23" width="1367" height="803" extended-state="0" />
     <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.21471025" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.21471025" />
       <window_info id="Structure" order="1" weight="0.25" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
@@ -263,8 +258,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/wgen.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="164">
-          <caret line="165" column="31" lean-forward="true" selection-end-line="421" />
+        <state relative-caret-position="422">
+          <caret line="399" column="18" selection-start-line="399" selection-start-column="18" selection-end-line="399" selection-end-column="18" />
           <folding>
             <element signature="e#122#141#0" expanded="true" />
           </folding>
