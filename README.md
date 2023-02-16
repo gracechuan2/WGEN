@@ -54,6 +54,4 @@ Inputs:
  ## Definitions
  - A day is considered wet if rainfall for the day is at least 0.01 mm 
  - Please be mindful that as of now, the generation will always start at January! 
- 
- ## Technical Documentation
- Coming soon!!! 
+
